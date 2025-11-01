@@ -1,0 +1,43 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "rrv7-monorepo-web",
+  "main": "./workers/app.ts",
+
+  "compatibility_date": "2025-04-04",
+  "compatibility_flags": [
+    "nodejs_compat",
+    "nodejs_compat_populate_process_env"
+  ],
+
+  // Configures automatic observability settings for telemetry data emitted from your Worker.
+  "observability": {
+    "enabled": true
+  },
+
+  // D1 databases configuration.
+  // It should be consistent with the d1_databases configuration in packages/db/wrangler.jsonc.
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "rrv7-monorepo",
+      "database_id": "d1_db_id",
+      "preview_database_id": "d1_db_preview_id"
+    }
+  ],
+
+  // Environment Variables.
+  "vars": {
+    "ENVIRONMENT": "production",
+    "VALUE_FROM_CLOUDFLARE": "Hello from Cloudflare"
+  },
+
+  // For remote preview deployment.
+  "env": {
+    "preview": {
+      "vars": {
+        "ENVIRONMENT": "preview",
+        "VALUE_FROM_CLOUDFLARE": "Hello from Cloudflare (Preview)"
+      }
+    }
+  }
+}
